@@ -1,6 +1,6 @@
 # EMIWise
 
-EMIWise is a responsive React web app for calculating loan EMIs and comparing multiple loan offers.
+EMIWise is a responsive Next.js and TypeScript web app for calculating loan EMIs and comparing multiple loan offers.
 
 ## Features
 
@@ -8,7 +8,7 @@ EMIWise is a responsive React web app for calculating loan EMIs and comparing mu
 - Loan comparison mode for three editable offers
 - Monthly EMI, total interest, total repayment, savings, and payment split
 - Responsive mobile and desktop UI
-- Production build powered by Vite and Tailwind CSS
+- Production build powered by Next.js and Tailwind CSS
 
 ## Scripts
 
@@ -16,7 +16,8 @@ EMIWise is a responsive React web app for calculating loan EMIs and comparing mu
 npm.cmd run dev
 npm.cmd run build
 npm.cmd run lint
-npm.cmd run preview
+npm.cmd run typecheck
+npm.cmd run start
 ```
 
 Use `npm.cmd` on Windows PowerShell if script execution policy blocks `npm.ps1`.

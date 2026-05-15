@@ -1,4 +1,34 @@
-import { useMemo, useState } from "react"
+"use client"
+
+import { type ChangeEvent, useMemo, useState } from "react"
+
+type LoanResult = {
+  emi: number
+  totalInterest: number
+  totalPayment: number
+  months: number
+}
+
+type LoanOption = {
+  id: "a" | "b" | "c"
+  name: string
+  rate: number
+}
+
+type Tone = "slate" | "teal" | "coral" | "indigo"
+
+type SliderFieldProps = {
+  label: string
+  value: number
+  display: string
+  inputSuffix?: string
+  minLabel: string
+  maxLabel: string
+  min: number
+  max: number
+  step?: number
+  onValueChange: (value: number) => void
+}
 
 const currency = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -10,13 +40,20 @@ const number = new Intl.NumberFormat("en-IN", {
   maximumFractionDigits: 2,
 })
 
-const compareOptions = [
+const compareOptions: LoanOption[] = [
   { id: "a", name: "Offer A", rate: 8.4 },
   { id: "b", name: "Offer B", rate: 9.1 },
   { id: "c", name: "Offer C", rate: 10.2 },
 ]
 
-function calculateEmi(principal, annualRate, years) {
+const MIN_LOAN_AMOUNT = 0
+const MAX_LOAN_AMOUNT = 50000000
+
+function clampValue(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value))
+}
+
+function calculateEmi(principal: number, annualRate: number, years: number): LoanResult {
   const months = Math.max(1, years * 12)
   const monthlyRate = annualRate / 12 / 100
 
@@ -43,8 +80,16 @@ function calculateEmi(principal, annualRate, years) {
   }
 }
 
-function Metric({ label, value, tone = "slate" }) {
-  const tones = {
+function Metric({
+  label,
+  value,
+  tone = "slate",
+}: {
+  label: string
+  value: string
+  tone?: Tone
+}) {
+  const tones: Record<Tone, string> = {
     slate: "text-slate-950",
     teal: "text-teal-700",
     coral: "text-rose-600",
@@ -63,29 +108,81 @@ function Metric({ label, value, tone = "slate" }) {
   )
 }
 
-function SliderField({ label, value, display, minLabel, maxLabel, ...props }) {
+function SliderField({
+  label,
+  value,
+  display,
+  inputSuffix,
+  minLabel,
+  maxLabel,
+  min,
+  max,
+  step = 1,
+  onValueChange,
+}: SliderFieldProps) {
+  const updateValue = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextValue = Number(event.target.value)
+
+    if (Number.isFinite(nextValue)) {
+      onValueChange(clampValue(nextValue, min, max))
+    }
+  }
+
   return (
-    <label className="block rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="block rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
       <div className="mb-4 flex items-center justify-between gap-4">
-        <span className="font-black text-slate-800">{label}</span>
-        <span className="text-lg font-black text-slate-950">{display}</span>
+        <label className="font-black text-slate-800" htmlFor={`${label}-input`}>
+          {label}
+        </label>
+        <div className="flex min-w-0 flex-col items-end gap-1">
+          <div className="flex max-w-44 items-center rounded-md border border-slate-200 bg-slate-50 text-slate-950 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
+            <input
+              id={`${label}-input`}
+              type="number"
+              value={value}
+              min={min}
+              max={max}
+              step={step}
+              onChange={updateValue}
+              className="min-w-0 flex-1 rounded-md bg-transparent px-3 py-2 text-right text-lg font-black outline-none"
+            />
+            {inputSuffix && (
+              <span className="pr-3 text-sm font-black text-slate-500">
+                {inputSuffix}
+              </span>
+            )}
+          </div>
+          <span className="text-xs font-bold text-slate-500">{display}</span>
+        </div>
       </div>
-      <input type="range" value={value} className="w-full accent-teal-600" {...props} />
+      <input
+        type="range"
+        value={value}
+        min={min}
+        max={max}
+        step={step}
+        onChange={updateValue}
+        aria-label={`${label} slider`}
+        className="w-full accent-teal-600"
+      />
       <div className="mt-2 flex justify-between text-xs font-bold text-slate-400">
         <span>{minLabel}</span>
         <span>{maxLabel}</span>
       </div>
-    </label>
+    </div>
   )
 }
 
 function SingleCalculator() {
-  const [amount, setAmount] = useState(750000)
+  const [amount, setAmount] = useState(0)
   const [rate, setRate] = useState(8.75)
   const [years, setYears] = useState(7)
 
   const result = useMemo(() => calculateEmi(amount, rate, years), [amount, rate, years])
-  const interestPercent = Math.min(100, (result.totalInterest / result.totalPayment) * 100)
+  const interestPercent =
+    result.totalPayment > 0
+      ? Math.min(100, (result.totalInterest / result.totalPayment) * 100)
+      : 0
 
   return (
     <section className="grid gap-6 xl:grid-cols-[1fr_420px]">
@@ -112,34 +209,35 @@ function SingleCalculator() {
             <SliderField
               label="Loan amount"
               value={amount}
-              min="50000"
-              max="10000000"
-              step="10000"
+              min={MIN_LOAN_AMOUNT}
+              max={MAX_LOAN_AMOUNT}
+              step={10000}
               display={currency.format(amount)}
-              minLabel={currency.format(50000)}
-              maxLabel={currency.format(10000000)}
-              onChange={(event) => setAmount(Number(event.target.value))}
+              minLabel={currency.format(MIN_LOAN_AMOUNT)}
+              maxLabel={currency.format(MAX_LOAN_AMOUNT)}
+              onValueChange={setAmount}
             />
             <SliderField
               label="Interest rate"
               value={rate}
-              min="0"
-              max="24"
-              step="0.05"
+              min={0}
+              max={24}
+              step={0.05}
+              inputSuffix="%"
               display={`${number.format(rate)}%`}
               minLabel="0%"
               maxLabel="24%"
-              onChange={(event) => setRate(Number(event.target.value))}
+              onValueChange={setRate}
             />
             <SliderField
               label="Tenure"
               value={years}
-              min="1"
-              max="30"
+              min={1}
+              max={30}
               display={`${years} years`}
               minLabel="1 year"
               maxLabel="30 years"
-              onChange={(event) => setYears(Number(event.target.value))}
+              onValueChange={setYears}
             />
           </div>
         </div>
@@ -213,9 +311,9 @@ function SingleCalculator() {
 }
 
 function ComparisonCalculator() {
-  const [amount, setAmount] = useState(1200000)
+  const [amount, setAmount] = useState(0)
   const [years, setYears] = useState(10)
-  const [rates, setRates] = useState({
+  const [rates, setRates] = useState<Record<LoanOption["id"], number>>({
     a: 8.4,
     b: 9.1,
     c: 10.2,
@@ -239,7 +337,7 @@ function ComparisonCalculator() {
   const savings = maxPayment - minPayment
   const maxEmi = Math.max(...loans.map((loan) => loan.result.emi))
 
-  const updateRate = (id, value) => {
+  const updateRate = (id: LoanOption["id"], value: string) => {
     setRates((current) => ({ ...current, [id]: Math.max(0, Number(value) || 0) }))
   }
 
@@ -258,23 +356,23 @@ function ComparisonCalculator() {
             <SliderField
               label="Loan amount"
               value={amount}
-              min="50000"
-              max="10000000"
-              step="10000"
+              min={MIN_LOAN_AMOUNT}
+              max={MAX_LOAN_AMOUNT}
+              step={10000}
               display={currency.format(amount)}
-              minLabel={currency.format(50000)}
-              maxLabel={currency.format(10000000)}
-              onChange={(event) => setAmount(Number(event.target.value))}
+              minLabel={currency.format(MIN_LOAN_AMOUNT)}
+              maxLabel={currency.format(MAX_LOAN_AMOUNT)}
+              onValueChange={setAmount}
             />
             <SliderField
               label="Tenure"
               value={years}
-              min="1"
-              max="30"
+              min={1}
+              max={30}
               display={`${years} years`}
               minLabel="1 year"
               maxLabel="30 years"
-              onChange={(event) => setYears(Number(event.target.value))}
+              onValueChange={setYears}
             />
           </div>
         </div>
@@ -289,7 +387,8 @@ function ComparisonCalculator() {
                 {bestLoan.name}
               </h3>
               <p className="mt-2 text-sm text-slate-300">
-                {number.format(bestLoan.rate)}% interest, {currency.format(bestLoan.result.emi)} EMI.
+                {number.format(bestLoan.rate)}% interest,{" "}
+                {currency.format(bestLoan.result.emi)} EMI.
               </p>
             </div>
             <div className="rounded-lg bg-white px-4 py-3 text-slate-950">
@@ -324,7 +423,7 @@ function ComparisonCalculator() {
       <div className="grid gap-4 lg:grid-cols-3">
         {loans.map((loan) => {
           const isBest = loan.id === bestLoan.id
-          const barWidth = Math.max(10, (loan.result.emi / maxEmi) * 100)
+          const barWidth = maxEmi > 0 ? Math.max(10, (loan.result.emi / maxEmi) * 100) : 0
 
           return (
             <article
@@ -394,8 +493,8 @@ function ComparisonCalculator() {
   )
 }
 
-export default function App() {
-  const [mode, setMode] = useState("single")
+export default function Home() {
+  const [mode, setMode] = useState<"single" | "compare">("single")
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#eef3f8] text-slate-950">
