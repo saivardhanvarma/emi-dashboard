@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import type { PropsWithChildren } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -8,9 +9,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
       <body>{children}</body>

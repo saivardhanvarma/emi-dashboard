@@ -15,7 +15,6 @@ EMIWise is a responsive Next.js and TypeScript web app for calculating loan EMIs
 ## Tech Stack
 
 - Next.js App Router
-- React
 - TypeScript
 - Tailwind CSS v4
 - ESLint
