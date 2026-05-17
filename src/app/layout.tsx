@@ -1,3 +1,4 @@
+import Script from "next/script"
 import type { Metadata } from "next"
 import type { PropsWithChildren } from "react"
 import { SiteFooter } from "@/components/site-footer"
@@ -47,6 +48,18 @@ export default function RootLayout({
 }: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-X9C7SZWMH6"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X9C7SZWMH6');`}
+        </Script>
+      </head>
       <body>
         <div className="min-h-screen overflow-hidden bg-[#eef3f8] text-slate-950">
           <div className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(135deg,#f8fafc,#e6f4f1_45%,#eef2ff)]" />
