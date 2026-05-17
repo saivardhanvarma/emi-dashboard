@@ -50,6 +50,7 @@ function SipField({
   step,
   suffix,
   display,
+  compact = false,
   onChange,
 }: {
   label: string
@@ -59,6 +60,7 @@ function SipField({
   step: number
   suffix?: string
   display: string
+  compact?: boolean
   onChange: (value: number) => void
 }) {
   const updateValue = (event: ChangeEvent<HTMLInputElement>) => {
@@ -70,12 +72,21 @@ function SipField({
   }
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <label className="font-black text-slate-800" htmlFor={`${label}-sip-input`}>
+    <div className="min-w-0 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+      <div
+        className={`mb-4 grid min-w-0 items-start gap-3 ${
+          compact
+            ? "grid-cols-[minmax(0,1fr)_84px] sm:grid-cols-[minmax(0,1fr)_96px]"
+            : "grid-cols-[minmax(0,1fr)_112px] sm:grid-cols-[minmax(0,1fr)_128px]"
+        }`}
+      >
+        <label
+          className="min-w-0 text-base font-black leading-6 text-slate-800"
+          htmlFor={`${label}-sip-input`}
+        >
           {label}
         </label>
-        <div className="flex max-w-44 items-center rounded-md border border-slate-200 bg-slate-50 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
+        <div className="flex h-12 min-w-0 items-center overflow-hidden rounded-md border border-slate-200 bg-slate-50 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
           <input
             id={`${label}-sip-input`}
             type="number"
@@ -84,9 +95,9 @@ function SipField({
             max={max}
             step={step}
             onChange={updateValue}
-            className="min-w-0 flex-1 rounded-md bg-transparent px-3 py-2 text-right text-lg font-black text-slate-950 outline-none"
+            className="min-w-0 flex-1 rounded-md bg-transparent px-3 py-2 text-right text-base font-black text-slate-950 outline-none sm:text-lg"
           />
-          {suffix && <span className="pr-3 text-sm font-black text-slate-500">{suffix}</span>}
+          {suffix && <span className="shrink-0 pr-3 text-sm font-black text-slate-500">{suffix}</span>}
         </div>
       </div>
       <input
@@ -99,7 +110,7 @@ function SipField({
         aria-label={`${label} slider`}
         className="w-full accent-teal-600"
       />
-      <p className="mt-2 text-xs font-bold text-slate-500">{display}</p>
+      <p className="mt-2 truncate text-xs font-bold text-slate-500">{display}</p>
     </div>
   )
 }
@@ -120,12 +131,12 @@ export function SipCalculator() {
       : 0
 
   return (
-    <section className="grid gap-6 xl:grid-cols-[1fr_420px]">
-      <div className="rounded-xl border border-white/70 bg-white/85 p-5 shadow-xl shadow-slate-200/70 sm:p-6">
+    <section className="grid min-w-0 gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+      <div className="min-w-0 rounded-xl border border-white/70 bg-white/85 p-5 shadow-xl shadow-slate-200/70 sm:p-6">
         <p className="text-sm font-black uppercase tracking-wide text-teal-700">
           SIP calculator
         </p>
-        <h1 className="mt-2 text-4xl font-black tracking-normal text-slate-950">
+        <h1 className="mt-2 text-3xl font-black tracking-normal text-slate-950 sm:text-4xl">
           Estimate monthly investment growth.
         </h1>
         <p className="mt-3 max-w-3xl leading-7 text-slate-600">
@@ -133,7 +144,7 @@ export function SipCalculator() {
           returns for a systematic investment plan.
         </p>
 
-        <div className="mt-6 grid gap-4 lg:grid-cols-3">
+        <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-3">
           <SipField
             label="Monthly SIP"
             value={monthlyInvestment}
@@ -151,6 +162,7 @@ export function SipCalculator() {
             step={0.5}
             suffix="%"
             display={`${number.format(annualReturn)}% annually`}
+            compact
             onChange={setAnnualReturn}
           />
           <SipField
@@ -160,12 +172,13 @@ export function SipCalculator() {
             max={40}
             step={1}
             display={`${years} years`}
+            compact
             onChange={setYears}
           />
         </div>
       </div>
 
-      <aside className="rounded-xl border border-slate-200 bg-slate-950 p-6 text-white shadow-xl shadow-slate-300/70">
+      <aside className="min-w-0 rounded-xl border border-slate-200 bg-slate-950 p-6 text-white shadow-xl shadow-slate-300/70">
         <p className="text-sm font-black uppercase tracking-wide text-teal-300">
           Estimated value
         </p>
