@@ -68,11 +68,11 @@ function Metric({
   }
 
   return (
-    <div className="rounded-lg border border-white/70 bg-white/75 p-4 shadow-sm backdrop-blur">
-      <p className="text-xs font-black uppercase tracking-wide text-slate-500">
+    <div className="min-w-0 rounded-lg border border-white/70 bg-white/75 p-3 shadow-sm backdrop-blur sm:p-4">
+      <p className="truncate text-xs font-black uppercase tracking-wide text-slate-500">
         {label}
       </p>
-      <p className={`mt-2 text-2xl font-black tracking-normal ${tones[tone]}`}>
+      <p className={`mt-2 truncate text-lg font-black tracking-normal sm:text-2xl ${tones[tone]}`}>
         {value}
       </p>
     </div>
@@ -126,7 +126,7 @@ function SliderField({
         <label className="text-sm font-black text-slate-800 sm:text-base" htmlFor={`${label}-input`}>
           {label}
         </label>
-        <div className="flex items-center rounded-md border border-slate-200 bg-slate-50 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
+        <div className="flex min-w-0 items-center overflow-hidden rounded-md border border-slate-200 bg-slate-50 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
           <input
             id={`${label}-input`}
             type="text"
@@ -134,15 +134,15 @@ function SliderField({
             value={inputText}
             onChange={handleTextChange}
             onBlur={handleBlur}
-            className="min-w-0 flex-1 rounded-md bg-transparent px-2 py-2 text-right text-sm font-black text-slate-950 outline-none sm:px-3 sm:py-2.5 sm:text-lg"
+            className="min-w-0 flex-1 rounded-md bg-transparent px-2 py-2 text-right text-sm font-black text-slate-950 outline-none sm:px-3 sm:py-2.5 sm:text-base"
           />
           {inputSuffix && (
-            <span className="pr-2 text-xs font-black text-slate-500 sm:pr-3 sm:text-sm">
+            <span className="shrink-0 pr-2 text-xs font-black text-slate-500 sm:pr-3 sm:text-sm">
               {inputSuffix}
             </span>
           )}
         </div>
-        <span className="text-xs font-bold text-slate-500">{display}</span>
+        <span className="truncate text-xs font-bold text-slate-500">{display}</span>
       </div>
       <input
         type="range"
@@ -154,9 +154,9 @@ function SliderField({
         aria-label={`${label} slider`}
         className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-teal-600"
       />
-      <div className="mt-2 flex justify-between text-xs font-bold text-slate-400">
-        <span>{minLabel}</span>
-        <span>{maxLabel}</span>
+      <div className="mt-2 flex justify-between gap-1 text-xs font-bold text-slate-400">
+        <span className="truncate">{minLabel}</span>
+        <span className="shrink-0">{maxLabel}</span>
       </div>
     </div>
   )
@@ -177,27 +177,17 @@ function SingleCalculator() {
       : 0
 
   return (
-    <section className="grid gap-6 xl:grid-cols-[1fr_420px]">
-      <div className="space-y-4">
-        <div className="rounded-xl border border-white/70 bg-white/80 p-4 shadow-xl shadow-slate-200/70 backdrop-blur sm:p-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <div className="min-w-0 overflow-hidden">
-              <p className="text-sm font-black uppercase tracking-wide text-teal-700">
-                Single EMI calculator
-              </p>
-              <h2 className="mt-2 break-words text-2xl font-black tracking-normal text-slate-950 sm:text-4xl">
-                Calculate one loan clearly.
-              </h2>
-            </div>
-            <div className="shrink-0 rounded-lg bg-slate-950 px-3 py-2 text-white sm:px-4 sm:py-3">
-              <p className="text-xs font-bold uppercase tracking-wide text-slate-300">
-                Monthly EMI
-              </p>
-              <p className="mt-1 text-xl font-black sm:text-2xl">{currency.format(result.emi)}</p>
-            </div>
-          </div>
+    <section className="min-w-0 space-y-6">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <div className="min-w-0 rounded-xl border border-white/70 bg-white/80 p-4 shadow-xl shadow-slate-200/70 backdrop-blur sm:p-6">
+          <p className="text-sm font-black uppercase tracking-wide text-teal-700">
+            Single EMI calculator
+          </p>
+          <h2 className="mt-2 text-2xl font-black tracking-normal text-slate-950 sm:text-3xl">
+            Calculate one loan clearly.
+          </h2>
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 space-y-4">
             <SliderField
               label="Loan amount"
               value={amount}
@@ -235,73 +225,94 @@ function SingleCalculator() {
           </div>
         </div>
 
-        <div className="grid gap-3 sm:gap-4 sm:grid-cols-3">
-          <Metric label="Monthly EMI" value={currency.format(result.emi)} tone="teal" />
-          <Metric
-            label="Total interest"
-            value={currency.format(result.totalInterest)}
-            tone="coral"
-          />
-          <Metric
-            label="Total payment"
-            value={currency.format(result.totalPayment)}
-            tone="indigo"
-          />
-        </div>
-      </div>
-
-      <aside className="rounded-xl border border-slate-200 bg-slate-950 p-4 text-white shadow-xl shadow-slate-300/70 sm:p-6">
-        <p className="text-sm font-black uppercase tracking-wide text-teal-300">
-          Payment split
-        </p>
-        <h3 className="mt-2 text-2xl font-black tracking-normal sm:text-3xl">
-          {currency.format(result.totalPayment)}
-        </h3>
-        <p className="mt-2 text-xs leading-6 text-slate-300 sm:text-sm">
-          Total repayment over {result.months} months at {number.format(rate)}%.
-        </p>
-
-        <div className="mt-6 space-y-4 sm:mt-8 sm:space-y-5">
-          <div>
-            <div className="mb-2 flex justify-between text-xs font-bold sm:text-sm">
-              <span>Principal</span>
-              <span>{currency.format(amount)}</span>
+        <div className="min-w-0 rounded-xl border border-slate-200 bg-slate-950 p-4 text-white shadow-xl shadow-slate-300/70 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-sm font-black uppercase tracking-wide text-teal-300">
+                Monthly EMI
+              </p>
+              <h3 className="mt-2 text-3xl font-black tracking-normal sm:text-4xl">
+                {currency.format(result.emi)}
+              </h3>
+              <p className="mt-2 text-xs leading-6 text-slate-300 sm:text-sm">
+                For {currency.format(amount)} over {formatTenure(tenureMonths)} at{" "}
+                {number.format(rate)}%.
+              </p>
             </div>
-            <div className="h-3 overflow-hidden rounded-full bg-white/10">
-              <div
-                className="h-full rounded-full bg-teal-400"
-                style={{ width: `${100 - interestPercent}%` }}
-              />
+            <div className="min-w-0 rounded-lg bg-white px-3 py-2 text-slate-950 sm:shrink-0 sm:px-4 sm:py-3">
+              <p className="text-xs font-black uppercase tracking-wide text-slate-500">
+                Total payment
+              </p>
+              <p className="mt-1 truncate text-xl font-black sm:text-2xl">
+                {currency.format(result.totalPayment)}
+              </p>
             </div>
           </div>
 
-          <div>
-            <div className="mb-2 flex justify-between text-xs font-bold sm:text-sm">
-              <span>Interest</span>
-              <span>{currency.format(result.totalInterest)}</span>
+          <div className="mt-6 grid min-w-0 gap-3 sm:grid-cols-2">
+            <div className="rounded-lg bg-white/10 p-3 sm:p-4">
+              <p className="text-xs font-black uppercase tracking-wide text-slate-300">
+                Interest
+              </p>
+              <p className="mt-2 truncate text-lg font-black text-rose-300 sm:text-xl">
+                {currency.format(result.totalInterest)}
+              </p>
             </div>
-            <div className="h-3 overflow-hidden rounded-full bg-white/10">
-              <div
-                className="h-full rounded-full bg-rose-400"
-                style={{ width: `${interestPercent}%` }}
-              />
+            <div className="rounded-lg bg-white/10 p-3 sm:p-4">
+              <p className="text-xs font-black uppercase tracking-wide text-slate-300">
+                Tenure
+              </p>
+              <p className="mt-2 truncate text-lg font-black text-teal-300 sm:text-xl">
+                {formatTenure(tenureMonths)}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 space-y-4 sm:mt-8 sm:space-y-5">
+            <div>
+              <div className="mb-2 flex justify-between gap-2 text-xs font-bold sm:text-sm">
+                <span className="shrink-0">Principal</span>
+                <span className="truncate text-right">{currency.format(amount)}</span>
+              </div>
+              <div className="h-3 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-teal-400"
+                  style={{ width: `${100 - interestPercent}%` }}
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-2 flex justify-between gap-2 text-xs font-bold sm:text-sm">
+                <span className="shrink-0">Interest</span>
+                <span className="truncate text-right">{currency.format(result.totalInterest)}</span>
+              </div>
+              <div className="h-3 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-rose-400"
+                  style={{ width: `${interestPercent}%` }}
+                />
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="mt-6 rounded-lg border border-white/10 bg-white/10 p-4 sm:mt-8">
-          <p className="text-xs font-black uppercase tracking-wide text-slate-300">
-            Quick read
-          </p>
-          <p className="mt-2 text-xs leading-6 text-slate-200 sm:text-sm">
-            Your EMI is {currency.format(result.emi)}. Interest makes up{" "}
-            {number.format(interestPercent)}% of your total payment.
-          </p>
-        </div>
-      </aside>
-      <div className="xl:col-span-2">
-        <AmortizationSchedule amount={amount} rate={rate} months={tenureMonths} />
       </div>
+
+      <div className="grid min-w-0 gap-4 lg:grid-cols-3">
+        <Metric label="Monthly EMI" value={currency.format(result.emi)} tone="teal" />
+        <Metric
+          label="Total interest"
+          value={currency.format(result.totalInterest)}
+          tone="coral"
+        />
+        <Metric
+          label="Total payment"
+          value={currency.format(result.totalPayment)}
+          tone="indigo"
+        />
+      </div>
+
+      <AmortizationSchedule amount={amount} rate={rate} months={tenureMonths} />
     </section>
   )
 }
@@ -338,9 +349,9 @@ function ComparisonCalculator() {
   }
 
   return (
-    <section className="space-y-6">
-      <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
-        <div className="rounded-xl border border-white/70 bg-white/80 p-4 shadow-xl shadow-slate-200/70 backdrop-blur sm:p-6">
+    <section className="min-w-0 space-y-6">
+      <div className="grid min-w-0 gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
+        <div className="min-w-0 rounded-xl border border-white/70 bg-white/80 p-4 shadow-xl shadow-slate-200/70 backdrop-blur sm:p-6">
           <p className="text-sm font-black uppercase tracking-wide text-indigo-700">
             Loan comparison
           </p>
@@ -374,7 +385,7 @@ function ComparisonCalculator() {
           </div>
         </div>
 
-        <div className="rounded-xl border border-slate-200 bg-slate-950 p-4 text-white shadow-xl shadow-slate-300/70 sm:p-6">
+        <div className="min-w-0 rounded-xl border border-slate-200 bg-slate-950 p-4 text-white shadow-xl shadow-slate-300/70 sm:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="text-sm font-black uppercase tracking-wide text-teal-300">
@@ -388,15 +399,15 @@ function ComparisonCalculator() {
                 {currency.format(bestLoan.result.emi)} EMI.
               </p>
             </div>
-            <div className="rounded-lg bg-white px-3 py-2 text-slate-950 sm:px-4 sm:py-3">
+            <div className="min-w-0 rounded-lg bg-white px-3 py-2 text-slate-950 sm:shrink-0 sm:px-4 sm:py-3">
               <p className="text-xs font-black uppercase tracking-wide text-slate-500">
                 Saves up to
               </p>
-              <p className="mt-1 text-xl font-black sm:text-2xl">{currency.format(savings)}</p>
+              <p className="mt-1 truncate text-xl font-black sm:text-2xl">{currency.format(savings)}</p>
             </div>
           </div>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid min-w-0 gap-3 sm:grid-cols-3">
             {loans.map((loan) => (
               <label key={loan.id} className="rounded-lg bg-white/10 p-3 sm:p-4">
                 <span className="text-xs font-black sm:text-sm">{loan.name}</span>
@@ -417,7 +428,7 @@ function ComparisonCalculator() {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-3">
         {loans.map((loan) => {
           const isBest = loan.id === bestLoan.id
           const barWidth = maxEmi > 0 ? Math.max(10, (loan.result.emi / maxEmi) * 100) : 0
@@ -464,7 +475,7 @@ function ComparisonCalculator() {
                 </div>
               </div>
 
-              <dl className="mt-6 grid grid-cols-2 gap-3">
+              <dl className="mt-6 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-lg bg-white/75 p-3 sm:p-4">
                   <dt className="text-xs font-black uppercase tracking-wide text-slate-500">
                     Interest
