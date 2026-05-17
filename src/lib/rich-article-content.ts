@@ -19,29 +19,36 @@ const richArticles: Record<string, RichArticle> = {
       {
         heading: "Why the EMI formula matters",
         body: [
-          "The EMI formula is useful because it turns a large loan into a monthly commitment you can compare with salary, rent, school fees, insurance, groceries, and savings. Many borrowers see only the approved loan amount and assume that approval means affordability. In practice, affordability depends on the monthly EMI, the number of months you must pay it, and the total interest that accumulates across the full tenure.",
-          "For a Rs. 10 lakh loan at 9% for 5 years, the monthly EMI is about Rs. 20,758. That number is easier to understand than the formula itself, but the formula explains why the EMI changes when tenure or rate changes. A higher rate increases the monthly interest component. A longer tenure spreads principal repayment across more months but gives interest more time to accumulate.",
+          "EMI turns a one-time loan obligation into a monthly number you can slot into a household budget. That simple transformation makes it possible to compare loans, negotiate offers, and test affordability against rent, insurance, school fees, and savings goals. Many borrowers focus on the approved loan amount or headline interest rate and miss that a comfortable monthly EMI is the real constraint that determines whether a loan is sustainable.",
+          "Understanding the formula also explains the direction and scale of change when you alter inputs. A higher interest rate raises the interest component of each EMI and can dramatically increase total interest over long tenures. Extending tenure reduces the monthly EMI but increases cumulative interest, sometimes substantially. The EMI formula lets you quantify these trade-offs instead of guessing.",
         ],
       },
       {
-        heading: "Principal and interest split",
+        heading: "Principal and interest split explained",
         body: [
-          "Every EMI has two parts: principal and interest. In the early months, a larger share of the EMI usually goes toward interest because the outstanding loan balance is high. As months pass and the balance reduces, more of the same EMI starts reducing principal. This is why prepayments made early in a loan can be more powerful than prepayments made near the end.",
-          "If you are taking a home loan, ask the lender for an amortisation schedule. It shows month-by-month principal repayment, interest charged, and outstanding balance. Reading this schedule makes the EMI result more practical because you can see how quickly your loan actually reduces.",
+          "Each EMI contains principal repayment and interest on the outstanding balance. Early in the loan the outstanding principal is high, so most of the EMI goes to interest. Over time the interest portion shrinks and the principal portion grows, which is why amortisation schedules matter: they show how quickly the outstanding balance falls and how much interest you actually pay month by month.",
+          "Seeing the split helps plan prepayments. A lump-sum payment made early in the tenure reduces the principal when interest charges are still large, producing large interest savings over time. Late prepayments save less interest because most earlier interest has already been charged. Use an amortisation table to visualise the impact of timing on savings.",
         ],
       },
       {
-        heading: "How to compare EMI scenarios",
+        heading: "Practical step-by-step comparison",
         body: [
-          "A good EMI comparison uses at least three scenarios. First, test the lender's exact offer. Second, test a slightly higher rate to understand risk if rates rise or if the final offer is worse. Third, test a shorter tenure to see whether paying a little extra monthly can save meaningful interest. This small exercise often reveals the real cost of choosing convenience over total savings.",
-          "For example, Rs. 10 lakh at 9% for 3 years has a much higher EMI than the 5-year version, but the total interest is lower. The 7-year version is easier monthly but costs more overall. The right answer depends on your income stability, emergency fund, and other goals.",
+          "Do not compare offers using rate alone. For each offer, compute: the EMI, total amount payable across the tenure, total interest, processing and legal fees, and prepayment or foreclosure charges. Then stress-test the offer: what happens if the rate rises by 0.5% or if you lose one month's income? The best-looking rate can be the worst choice if it forces risky behaviour later.",
+          "Try three scenarios: conservative (higher rate, shorter tenure), realistic (expected rate, desired tenure), and safety-first (lower EMI, longer tenure but with planned prepayments). The comparison reveals which option balances monthly comfort with total cost best for your situation.",
         ],
       },
       {
-        heading: "When the calculator result can differ",
+        heading: "Common real-world differences from calculators",
         body: [
-          "Your lender's final EMI can differ from a public calculator because banks may include processing charges, insurance premiums, different compounding assumptions, rate reset dates, or rounding rules. Some lenders also calculate interest from disbursal date to first EMI date separately. That does not make the calculator useless; it means the calculator is a planning tool, while the sanction letter is the final document.",
-          "Use EMIWYZE before applying so you can negotiate and shortlist offers. Once you receive an official offer, compare the lender's EMI, total payment, fees, foreclosure terms, and prepayment rules against your calculator estimate.",
+          "Public calculators are planning tools and may not include lender-specific items: processing fees, insurance add-ons, rate reset rules, interest from disbursal to EMI start, and rounding or compounding conventions. Lenders may also treat part-payments differently (for example, they may reduce EMI or tenure), so check the contract text and get the lender to run the exact amortisation schedule for your case.",
+          "Use a calculator to shortlist and negotiate, then request the official schedule from the lender before signing. If the lender's schedule differs, ask for a written explanation of the discrepancy so you can compare total cost apples-to-apples.",
+        ],
+      },
+      {
+        heading: "How to use EMI results in broader planning",
+        body: [
+          "Treat the EMI number as one input inside a broader household plan. Before committing, list fixed monthly obligations, emergency buffer needs, insurance costs, and saving targets. Ask whether the EMI will allow you to save for retirement and other goals; if not, reduce the loan amount or increase the down payment.",
+          "If you expect income growth, plan to increase EMI or reduce tenure as income rises. That combination preserves short-term affordability while using future income to save interest costs. Document the assumptions you used when modelling EMI so you can revisit them later.",
         ],
       },
     ],
@@ -49,17 +56,22 @@ const richArticles: Record<string, RichArticle> = {
       {
         question: "Which formula does EMIWYZE use?",
         answer:
-          "It uses the standard reducing-balance EMI formula based on principal, monthly interest rate, and tenure in months.",
+          "It uses the standard reducing-balance EMI formula based on principal, monthly interest rate, and tenure in months. This is the common method used by most lenders for loans that follow a reducing balance approach.",
       },
       {
         question: "Why is my bank EMI slightly different?",
         answer:
-          "Banks may include fees, insurance, interest from disbursal date, and rounding rules that a simple planning calculator does not include.",
+          "Banks may add processing fees, insurance premiums, interest from disbursal to the first EMI, and specific rounding rules that a simple public calculator might not reflect. Always request the lender's amortisation schedule for an exact picture.",
       },
       {
         question: "Should I choose the lowest EMI?",
         answer:
-          "Not always. A lower EMI from a longer tenure can increase total interest, so compare EMI and total interest together.",
+          "Not always. A lower EMI from a longer tenure reduces monthly pressure but increases total interest. Balance monthly affordability with total cost and consider whether you can make occasional prepayments to shorten the tenure later.",
+      },
+      {
+        question: "When should I prioritise prepayment?",
+        answer:
+          "Prioritise prepayment when the loan interest rate is high relative to safe investment returns, you have excess cash beyond an emergency fund, and your lender allows prepayment without punitive fees. Early prepayments yield the largest interest savings.",
       },
     ],
   },
@@ -68,29 +80,36 @@ const richArticles: Record<string, RichArticle> = {
       {
         heading: "Start with a home-buying budget, not loan eligibility",
         body: [
-          "Home loan eligibility is the maximum amount a lender may be willing to offer. Your real budget is the amount you can repay without disturbing emergency savings, insurance premiums, family expenses, maintenance, and long-term goals. In India, home ownership also brings stamp duty, registration charges, society deposits, interiors, repairs, shifting cost, and property tax. These are easy to miss when you only compare EMI.",
-          "Before applying, calculate EMI for the expected loan amount and then add non-EMI costs to your monthly budget. A Rs. 50 lakh home loan at 8.75% for 20 years may look manageable on EMI alone, but the full monthly housing cost can be higher once maintenance, parking, utilities, and insurance are included.",
+          "Loan eligibility tells you what a bank may lend, not what you should borrow. A sensible starting point is to decide the monthly housing cost you can carry without cutting essential savings: EMI, maintenance, insurance, utilities, and any society or municipal charges. Factor in stamp duty and registration because these upfront costs reduce your available savings after purchase.",
+          "Create a three-column affordability sheet: net income, fixed outflows (rent, EMIs, insurance), and flexible outflows (food, transport, subscriptions). The residual column shows what you can realistically allocate to housing. This approach prevents overstretching your monthly cash flow even if a lender offers more credit.",
         ],
       },
       {
-        heading: "Check rate type and reset rules",
+        heading: "Understand rate types, spreads and reset behaviour",
         body: [
-          "Many Indian home loans are floating-rate loans. The interest rate can change when the benchmark changes, and the lender may adjust EMI, tenure, or both. Ask how often the rate resets and whether you can reduce tenure when rates fall or income rises. A lower advertised rate is less useful if the reset terms are unclear or expensive to modify.",
-          "Also check the spread over the benchmark. Two banks can quote similar starting rates but behave differently after reset. Keep copies of sanction letters and rate-change notices so you can compare your loan against new borrower rates later.",
+          "Many Indian home loans are floating-rate and tied to a benchmark. The quoted rate often shows the benchmark plus a spread. Ask which benchmark the bank uses, how often the rate is reviewed, and whether the lender changes EMI or tenure when the rate moves. These operational details determine how future rate changes affect your monthly burden.",
+          "When comparing offers, translate rate differences into EMI and total interest for the remaining tenure. Even a 0.25% rate difference can matter on large loans. Also check whether the bank allows conversion, part-prepayments, and penalty-free foreclosures and how those actions are applied in the amortisation schedule.",
         ],
       },
       {
-        heading: "Prepayment strategy for home loans",
+        heading: "Prepayment and tenure management",
         body: [
-          "Home loans are long, so even small prepayments can reduce interest meaningfully when done early. If you receive annual bonuses, incentives, or business surplus, test a prepayment scenario before spending the amount elsewhere. The benefit is strongest when the outstanding principal is high and tenure remaining is long.",
-          "When making prepayments, ask the lender whether the payment reduces EMI or tenure. Reducing tenure usually saves more interest if you can afford the current EMI. Reducing EMI improves monthly cash flow. The better choice depends on whether your priority is savings or flexibility.",
+          "Prepayment is a powerful tool on long home loans. If you receive bonuses or lump sums, calculate whether applying them to reduce tenure or EMI gives better benefits. Reducing tenure typically preserves your monthly discipline while saving more total interest compared with only reducing EMI.",
+          "Ask the lender whether prepayments reduce tenure or EMI by default, and whether they charge a fee. In many cases, reducing tenure is the mathematically superior option for total savings, but if you need immediate monthly relief, reducing EMI may be preferable temporarily.",
         ],
       },
       {
-        heading: "Documents and due diligence",
+        heading: "Property, paperwork and hidden costs",
         body: [
-          "A home loan decision is not only about EMI. Review property title, approved plan, occupancy certificate, builder reputation, bank valuation, legal report, and insurance requirements. If the property has legal or construction risk, a comfortable EMI will not protect you from bigger problems.",
-          "Use calculators to prepare, but use professional checks before purchase. A good home loan is a combination of affordable EMI, clean property documents, transparent lender terms, and enough cash buffer after registration.",
+          "A loan is only as good as the asset it secures. Verify property title, completion certificate, builder approvals, and encumbrance certificates. Valuation reports, legal fees, and insurer conditions can add to upfront costs and affect disbursal timing. These practical items can delay moving in or increase initial outflow, so include them in your plan.",
+          "Beware of builder offers that bundle favours such as insurance or maintenance with the loan. These may be convenient but could be more expensive than market alternatives. Negotiate such bundles or opt out when possible.",
+        ],
+      },
+      {
+        heading: "Negotiation and review",
+        body: [
+          "A clean credit score and documented income help when negotiating rates. Approach multiple lenders and use EMI comparisons to show how rate differences change total cost. Even small concessions on processing fee or spread can save significant amounts over a long loan.",
+          "Review your loan annually. Market conditions, rate movement, and improved credit profiles create chances to refinance or request a rate reduction. Compare the long-term savings against transfer and legal costs before switching lenders.",
         ],
       },
     ],
@@ -98,17 +117,22 @@ const richArticles: Record<string, RichArticle> = {
       {
         question: "How much home loan EMI is safe?",
         answer:
-          "There is no one rule, but the EMI should leave room for essential expenses, emergency savings, insurance, and maintenance.",
+          "There is no universal answer. A safe EMI leaves room for emergency savings, insurance, maintenance, and other goals. Build a budget to test whether the EMI fits without sacrificing essentials.",
       },
       {
-        question: "Is a longer home loan tenure bad?",
+        question: "Is a longer home loan tenure advisable?",
         answer:
-          "It lowers EMI but raises total interest. It can be useful early in life, but review prepayment or tenure reduction when income improves.",
+          "Longer tenure lowers EMI but increases total interest. It can help with short-term affordability, but plan to make extra payments later to avoid paying excess interest over time.",
       },
       {
-        question: "Should I transfer my home loan?",
+        question: "When should I consider balance transfer?",
         answer:
-          "Consider transfer only after comparing interest savings with processing, legal, valuation, and documentation costs.",
+          "Consider transfer when the interest savings net of transfer fees and valuation charges are positive over the remaining tenure. Run the numbers and include hassle, time, and documentation costs.",
+      },
+      {
+        question: "What paperwork is most often missed?",
+        answer:
+          "Title and encumbrance checks, builder approvals, and correct GST/stamp duty calculations are commonly overlooked. Professional legal review is prudent for high-value purchases.",
       },
     ],
   },
@@ -164,31 +188,31 @@ const richArticles: Record<string, RichArticle> = {
   "personal-loan-emi-planning": {
     sections: [
       {
-        heading: "Personal loans need stricter EMI planning",
+        heading: "Why personal loan planning needs care",
         body: [
-          "Personal loans are unsecured, so interest rates are usually higher than home loans or some vehicle loans. The convenience is real: quick approval, limited documents, and flexible use. But the same convenience can become expensive if the EMI is chosen without checking total interest and monthly cash flow.",
-          "A Rs. 5 lakh personal loan at 13% for 4 years can look manageable, but processing fees, GST on fees, insurance offers, and prepayment charges can change the true cost. Always compare the final disbursal amount with the total amount payable.",
+          "Personal loans are unsecured, often carrying higher interest rates than secured housing or vehicle loans. They are easy to obtain quickly, which can encourage borrowing for consumption. That convenience is useful in emergencies but can become costly if the tenor is stretched or if you ignore fees and tax on charges. A careful plan looks beyond EMI and examines total cost, disbursal amount after fees, and closure terms.",
+          "When modelling, always compare the effective cost: the net amount you receive versus the total amount payable across the tenure. Processing fees, GST on fees, insurance add-ons, and prepayment penalties can materially change the effective interest rate you end up paying.",
         ],
       },
       {
-        heading: "Choose tenure based on purpose",
+        heading: "Match tenure to purpose",
         body: [
-          "If the loan is for a short-term need such as medical expenses, repairs, or temporary cash flow, a shorter tenure may be sensible if the EMI is affordable. If the loan is for consumption spending, be careful about stretching the tenure because you may still be paying for an item long after its value has reduced.",
-          "Do not choose the maximum tenure only because the EMI is low. Calculate the interest difference between 2, 3, 4, and 5 years. The monthly difference may be smaller than expected, while the interest saving can be meaningful.",
+          "Choose tenure aligned with the purpose. Short, high-priority expenses (medical bills, urgent repairs) are best repaid quickly to avoid long interest accrual. For necessary durable purchases, avoid extending tenure just because EMI becomes small; you may continue paying long after the benefit fades, increasing real cost.",
+          "Create a repayment plan that factors in expected income changes and possible windfalls (bonuses, tax refunds). Use windfalls for prepayments rather than lifestyle increases to reduce total interest.",
         ],
       },
       {
-        heading: "Avoid debt stacking",
+        heading: "Avoid stacking and check cash flow",
         body: [
-          "Debt stacking happens when you add a new EMI while existing credit card bills, consumer loans, or app loans are already active. Even if each EMI seems small, the combined monthly obligation can become stressful. Missed payments then affect credit score and make future borrowing more expensive.",
-          "Before taking a personal loan, list every monthly obligation: rent, insurance, school fees, subscriptions, credit card minimums, existing loans, and family commitments. The new EMI should fit after this full list, not before it.",
+          "List all monthly obligations before taking a new personal loan: rent, utilities, subscriptions, existing EMIs, insurance, and any variable family support. Add the proposed EMI and confirm it fits comfortably even if income falls by a reasonable cushion (for example, 20%). If not, lower the loan amount or extend the tenor only after careful calculation.",
+          "Debt stacking often leads to payment stress and missed EMIs, which damage credit scores and increase borrowing costs. If you already have multiple liabilities, prefer paying down higher-rate debt first before adding new unsecured borrowing.",
         ],
       },
       {
-        heading: "Prepayment and closure",
+        heading: "Prepayment, foreclosure and closure steps",
         body: [
-          "Many personal loans allow prepayment only after a minimum number of EMIs, and some charge a foreclosure fee. If you expect a bonus or variable income, check these terms before borrowing. A slightly higher rate with flexible prepayment can sometimes be better than a lower rate with rigid rules.",
-          "When closing early, request a no-dues certificate and check your credit report after a few weeks to confirm the loan status is updated. Clean closure records help when applying for future home or vehicle loans.",
+          "Check whether the lender allows prepayment, when it becomes available, and whether a foreclosure fee applies. If you expect variable income, prefer a product that allows flexible prepayments without punitive charges. A slightly higher nominal rate with flexible prepayment can outperform a lower rate with rigid closure terms.",
+          "When you close a loan, obtain a no-dues certificate, confirm the lien removal, and verify your credit report to ensure the account is reported closed. These steps prevent future surprises during large loan applications like home loans.",
         ],
       },
     ],
@@ -196,17 +220,22 @@ const richArticles: Record<string, RichArticle> = {
       {
         question: "What is a safe personal loan tenure?",
         answer:
-          "Prefer the shortest tenure you can comfortably afford, because personal loan rates are usually higher than secured loans.",
+          "Prefer the shortest tenure you can comfortably afford because personal loan rates are usually higher than secured loans. Shorter tenure reduces total interest paid.",
       },
       {
-        question: "Should I use a personal loan for investment?",
+        question: "Should I use a personal loan to invest?",
         answer:
-          "Usually no. Borrowing at a fixed high cost to invest in uncertain returns can be risky.",
+          "Generally no. Borrowing at higher fixed cost to chase uncertain returns increases net risk. Investment using borrowed money is suitable only for experienced investors with clear arbitrage opportunities.",
       },
       {
-        question: "Does prepayment improve credit score?",
+        question: "Does prepayment help my credit score?",
         answer:
-          "Prepayment can reduce debt burden, but consistent on-time repayment is the main factor for credit behaviour.",
+          "Prepayment reduces outstanding debt, but consistent timely payments are the main driver of creditworthiness. Prepayment helps behaviourally and reduces future interest burden.",
+      },
+      {
+        question: "How do fees change effective cost?",
+        answer:
+          "Processing fees and GST reduce the net disbursal and raise the effective interest rate. Always calculate the net amount received and compare it with total repayment to see the true cost.",
       },
     ],
   },
@@ -308,34 +337,85 @@ const richArticles: Record<string, RichArticle> = {
       },
     ],
   },
+  "sip-vs-fd": {
+    sections: [
+      {
+        heading: "Overview: SIP and FD in plain language",
+        body: [
+          "A fixed deposit (FD) locks your money with a bank for a fixed interest rate and term, offering predictability and capital protection. A systematic investment plan (SIP) invests a fixed amount regularly into mutual funds, exposing you to market ups and downs but also to the potential of higher long-term returns. The two choices serve different roles: FD for safety and liquidity (short-to-medium term), SIPs for long-term wealth creation with the capacity to ride market cycles.",
+        ],
+      },
+      {
+        heading: "Risk, return and horizon",
+        body: [
+          "Risk and expected return are the central differences. FDs offer nominal returns fixed at the start; real returns depend on inflation. SIPs, especially in equity funds, can offer inflation-beating returns over longer horizons but can fall sharply in the short term. Match the product to the horizon: use FDs for goals under three years and SIPs for goals beyond five years where volatility smooths out.",
+        ],
+      },
+      {
+        heading: "Tax and post-tax returns",
+        body: [
+          "Tax treatment changes the comparison. Interest from FDs is taxed as income at your slab rate, which can erode returns for high-rate taxpayers. Mutual fund gains depend on the fund type and holding period: equity funds held beyond one year qualify for long-term capital gains treatment (with favourable rates and exemptions), while debt funds have a different tax schedule. Always compare post-tax returns for your bracket.",
+        ],
+      },
+      {
+        heading: "Liquidity and emergency use",
+        body: [
+          "FDs usually allow premature withdrawals but may charge a penalty, while SIPs can be stopped or partially redeemed with market exposure. For an emergency fund, keep money in liquid FDs or savings accounts, not in equity SIPs that could be down when you need funds. Treat SIPs as long-term commitments and avoid redeeming during market dips unless necessary.",
+        ],
+      },
+      {
+        heading: "Behavioural advantages of SIPs",
+        body: [
+          "SIPs enforce disciplined investing, buy more units when prices fall, and less when prices rise (rupee cost averaging). This can help avoid timing the market and capture long-term upward trends. FDs remove market anxiety but also remove upside potential. Many investors combine both: emergency and near-term goals in FDs, long-term goals via SIPs.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Which is safer: SIP or FD?",
+        answer:
+          "FDs are safer in nominal terms because the principal is guaranteed (subject to bank credit risk), while SIPs are market-linked and can fall. SIP safety increases with longer horizons.",
+      },
+      {
+        question: "Can SIP beat FD?",
+        answer:
+          "Historically, equity SIPs have tended to outperform FDs over long periods after adjusting for risk and inflation, but past performance is not a guarantee. Choose based on horizon and risk tolerance.",
+      },
+      {
+        question: "Should I split between SIP and FD?",
+        answer:
+          "Yes. Keep an emergency buffer in liquid FDs or savings. Use SIPs for long-term goals where you can tolerate volatility and seek higher inflation-beating returns.",
+      },
+    ],
+  },
   "gst-calculation-basics": {
     sections: [
       {
         heading: "GST inclusive versus exclusive pricing",
         body: [
-          "GST exclusive pricing means tax is added over the base value. GST inclusive pricing means the final price already contains tax. This difference matters in quotations, retail bills, service invoices, and vendor comparisons. Two quotes can look different simply because one includes GST and the other adds it later.",
-          "If the base price is Rs. 10,000 and GST is 18%, the invoice total is Rs. 11,800. If the quoted amount is Rs. 11,800 inclusive of GST, the base value is Rs. 10,000 and GST is Rs. 1,800. The same numbers appear, but the interpretation is different.",
+          "Inclusive pricing hides the tax inside the final price and is common in retail. Exclusive pricing shows the base value and adds GST on top, which is common in business-to-business quotes. The arithmetic is simple but the interpretation matters: two offers that look identical in numbers can mean very different things for input tax credits and margin calculations.",
+          "When a vendor quotes Rs. 11,800 inclusive of 18% GST, the taxable value is Rs. 10,000 and the GST is Rs. 1,800. For a finance person, seeing the taxable value separately is essential for accounting and claiming input tax credit where eligible.",
         ],
       },
       {
-        heading: "Why businesses should separate taxable value",
+        heading: "Classification, place of supply and tax heads",
         body: [
-          "For business records, taxable value and GST amount should be clearly separated. This helps with bookkeeping, input tax credit review, pricing decisions, and invoice reconciliation. A simple GST calculator can prevent confusion when converting inclusive prices into base values.",
-          "Small businesses should also check whether CGST and SGST apply or whether IGST applies for interstate supply. The calculator gives arithmetic support, but classification and compliance should be confirmed with a tax professional.",
+          "GST is not a single flat tax. It has multiple rates and depends on the classification of the good or service (HSN/SAC), intra-state versus inter-state supply (CGST+SGST vs IGST), and the place of supply rules. Small businesses must ensure correct HSN/SAC codes on invoices and determine whether a supply attracts 0%, 5%, 12%, 18%, or 28% in practice.",
+          "Errors in classification can cause rejected input claims or future demand notices. A calculator solves arithmetic, but classification and compliance need a human or professional review for higher-value transactions.",
         ],
       },
       {
-        heading: "Common invoice checks",
+        heading: "Invoice checklist and bookkeeping",
         body: [
-          "A clean invoice should show supplier details, GSTIN, invoice number, date, place of supply, description, HSN or SAC where applicable, taxable value, rate, tax amount, and total value. Missing details can create problems during accounting or credit claims.",
-          "When comparing vendors, ask whether the price is inclusive or exclusive of GST. A quote of Rs. 50,000 plus GST is not the same as Rs. 50,000 inclusive of GST.",
+          "A compliant invoice lists supplier details, GSTIN, invoice number, date, place of supply, taxable value, rate, tax amount, HSN/SAC, and total amount. For businesses claiming input tax credit, the invoice must be clean to avoid compliance issues.",
+          "Use a GST calculator to convert between inclusive and exclusive values and to split multi-rate invoices. But always reconcile calculator output with accounting entries and monthly GSTR filings.",
         ],
       },
       {
-        heading: "Use GST calculation for pricing decisions",
+        heading: "Pricing decisions and customer communication",
         body: [
-          "GST affects customer-facing price. If your market is price-sensitive, decide whether the listed price should include GST or show GST separately. Inclusive pricing is easier for retail customers, while business buyers may prefer tax breakup.",
-          "Keep margin calculations separate from GST. GST collected from customers is not profit; it is tax collected and payable according to applicable rules after considering eligible credits.",
+          "Decide whether to display prices as GST-inclusive or exclusive based on your customer type. Retail customers appreciate simplicity with inclusive pricing; business buyers prefer separate tax lines so they can see taxable value and claim credits. Align your invoice and website pricing consistently to avoid disputes.",
+          "Remember that GST is collected on behalf of the government. Do not treat it as margin. Maintain separate ledger lines and reconcile GST collections monthly to avoid deposit errors.",
         ],
       },
     ],
@@ -343,17 +423,22 @@ const richArticles: Record<string, RichArticle> = {
       {
         question: "How do I remove GST from an inclusive price?",
         answer:
-          "Divide the inclusive price by 1 plus the GST rate. For 18%, divide by 1.18 to get the base value.",
+          "Divide the inclusive price by 1 plus the GST rate (for 18% divide by 1.18) to get the taxable value and subtract to find the GST component.",
       },
       {
         question: "Is GST part of profit?",
         answer:
-          "No. GST collected is tax, not business profit. Margin should be calculated on taxable value.",
+          "No. GST collected is tax to be remitted. Profit calculations should be done on taxable value, not the GST-inclusive price.",
       },
       {
-        question: "Can a calculator decide GST rate?",
+        question: "Can a calculator determine the correct GST rate?",
         answer:
-          "No. GST classification depends on goods or services. Confirm the applicable rate separately.",
+          "No. A calculator handles arithmetic. Determining the applicable GST rate depends on product/service classification and legal rules — consult a tax professional for ambiguous cases.",
+      },
+      {
+        question: "Should small sellers show inclusive or exclusive prices?",
+        answer:
+          "For retail customers, inclusive prices simplify the buying decision. For business customers, exclusive pricing with a clear tax line is usually preferred so buyers can process input tax claims.",
       },
     ],
   },
