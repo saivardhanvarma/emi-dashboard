@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-2xl font-black text-slate-950">Contact</h2>
             <p className="mt-2">
-              For privacy questions, contact support@emiwyze.in. This policy may
+              For privacy questions, contact support@emiwyze.online. This policy may
               be updated when site features, analytics, or advertising providers
               change.
             </p>

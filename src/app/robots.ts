@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.in"
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.online"
 
 export default function robots(): MetadataRoute.Robots {
   return {

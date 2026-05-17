@@ -5,7 +5,7 @@ type CalculatorSchemaProps = {
 }
 
 export function CalculatorSchema({ name, description, path }: CalculatorSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.in"
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.online"
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",

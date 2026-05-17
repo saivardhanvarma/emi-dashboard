@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { articles } from "@/lib/articles"
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.in"
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.online"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [

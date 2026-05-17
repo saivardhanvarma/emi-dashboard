@@ -62,6 +62,6 @@ export const faqs: Faq[] = [
   {
     question: "How can I contact EMIWYZE?",
     answer:
-      "You can use the Contact Us page or email support@emiwyze.in for feedback, corrections, calculator issues, or content suggestions.",
+      "You can use the Contact Us page or email support@emiwyze.online for feedback, corrections, calculator issues, or content suggestions.",
   },
 ]
