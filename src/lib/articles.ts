@@ -198,6 +198,28 @@ export const articles: Article[] = [
     ],
   },
   {
+    slug: "sip-vs-fd",
+    title: "SIP vs FD: Which Is Better for Your Goal?",
+    description:
+      "Compare systematic investment plans (SIPs) in mutual funds with fixed deposits (FDs) to choose the right option for risk, returns, liquidity, and goals.",
+    category: "SIP",
+    readingTime: "6 min read",
+    sections: [
+      {
+        heading: "Why this comparison matters",
+        body: [
+          "SIP and FD are two common choices for retail savers. SIPs offer market-linked returns with compounding, while FDs offer fixed nominal returns with capital protection. Choosing between them depends on your goal horizon, risk tolerance, tax situation, and need for liquidity.",
+        ],
+      },
+      {
+        heading: "Short summary",
+        body: [
+          "For short-term, capital-safe needs, FDs can be suitable. For long-term goals where you can accept volatility, SIPs historically offer higher inflation-beating returns. Many investors use a mix: keep an emergency cushion in FDs and deploy surplus monthly into SIPs for long-term wealth creation.",
+        ],
+      },
+    ],
+  },
+  {
     slug: "gst-calculation-basics",
     title: "GST Calculation Basics for Small Businesses and Buyers",
     description:
