@@ -1,6 +1,4 @@
-import type { MetadataRoute } from "next"
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://emiwyze.online"
+import { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,6 +6,9 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+
+    sitemap: "https://emiwyze.online/sitemap.xml",
+
+    host: "https://emiwyze.online",
   }
 }
