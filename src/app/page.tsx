@@ -1,13 +1,11 @@
 "use client"
 
 import { type ChangeEvent, useMemo, useState } from "react"
-
-type LoanResult = {
-  emi: number
-  totalInterest: number
-  totalPayment: number
-  months: number
-}
+import { AmortizationSchedule } from "@/components/amortization-schedule"
+import {
+  calculateEmiByMonths,
+  formatTenure,
+} from "@/lib/loan-calculations"
 
 type LoanOption = {
   id: "a" | "b" | "c"
@@ -51,33 +49,6 @@ const MAX_LOAN_AMOUNT = 50000000
 
 function clampValue(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value))
-}
-
-function calculateEmi(principal: number, annualRate: number, years: number): LoanResult {
-  const months = Math.max(1, years * 12)
-  const monthlyRate = annualRate / 12 / 100
-
-  if (monthlyRate <= 0) {
-    const emi = principal / months
-
-    return {
-      emi: Math.round(emi),
-      totalInterest: 0,
-      totalPayment: Math.round(principal),
-      months,
-    }
-  }
-
-  const compound = Math.pow(1 + monthlyRate, months)
-  const emi = (principal * monthlyRate * compound) / (compound - 1)
-  const totalPayment = emi * months
-
-  return {
-    emi: Math.round(emi),
-    totalInterest: Math.round(totalPayment - principal),
-    totalPayment: Math.round(totalPayment),
-    months,
-  }
 }
 
 function Metric({
@@ -174,11 +145,14 @@ function SliderField({
 }
 
 function SingleCalculator() {
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(1000000)
   const [rate, setRate] = useState(8.75)
-  const [years, setYears] = useState(7)
+  const [tenureMonths, setTenureMonths] = useState(84)
 
-  const result = useMemo(() => calculateEmi(amount, rate, years), [amount, rate, years])
+  const result = useMemo(
+    () => calculateEmiByMonths(amount, rate, tenureMonths),
+    [amount, rate, tenureMonths],
+  )
   const interestPercent =
     result.totalPayment > 0
       ? Math.min(100, (result.totalInterest / result.totalPayment) * 100)
@@ -231,13 +205,14 @@ function SingleCalculator() {
             />
             <SliderField
               label="Tenure"
-              value={years}
+              value={tenureMonths}
               min={1}
-              max={30}
-              display={`${years} years`}
-              minLabel="1 year"
+              max={360}
+              inputSuffix="mo"
+              display={formatTenure(tenureMonths)}
+              minLabel="1 month"
               maxLabel="30 years"
-              onValueChange={setYears}
+              onValueChange={setTenureMonths}
             />
           </div>
         </div>
@@ -306,13 +281,16 @@ function SingleCalculator() {
           </p>
         </div>
       </aside>
+      <div className="xl:col-span-2">
+        <AmortizationSchedule amount={amount} rate={rate} months={tenureMonths} />
+      </div>
     </section>
   )
 }
 
 function ComparisonCalculator() {
-  const [amount, setAmount] = useState(0)
-  const [years, setYears] = useState(10)
+  const [amount, setAmount] = useState(1000000)
+  const [tenureMonths, setTenureMonths] = useState(120)
   const [rates, setRates] = useState<Record<LoanOption["id"], number>>({
     a: 8.4,
     b: 9.1,
@@ -324,9 +302,9 @@ function ComparisonCalculator() {
       compareOptions.map((option) => ({
         ...option,
         rate: rates[option.id],
-        result: calculateEmi(amount, rates[option.id], years),
+        result: calculateEmiByMonths(amount, rates[option.id], tenureMonths),
       })),
-    [amount, rates, years],
+    [amount, rates, tenureMonths],
   )
 
   const bestLoan = loans.reduce((best, loan) =>
@@ -366,13 +344,14 @@ function ComparisonCalculator() {
             />
             <SliderField
               label="Tenure"
-              value={years}
+              value={tenureMonths}
               min={1}
-              max={30}
-              display={`${years} years`}
-              minLabel="1 year"
+              max={360}
+              inputSuffix="mo"
+              display={formatTenure(tenureMonths)}
+              minLabel="1 month"
               maxLabel="30 years"
-              onValueChange={setYears}
+              onValueChange={setTenureMonths}
             />
           </div>
         </div>
@@ -440,7 +419,7 @@ function ComparisonCalculator() {
                     {loan.name}
                   </h3>
                   <p className="mt-1 text-sm font-bold text-slate-500">
-                    {number.format(loan.rate)}% for {years} years
+                    {number.format(loan.rate)}% for {formatTenure(tenureMonths)}
                   </p>
                 </div>
                 {isBest && (
@@ -497,53 +476,7 @@ export default function Home() {
   const [mode, setMode] = useState<"single" | "compare">("single")
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#eef3f8] text-slate-950">
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(20,184,166,0.22),transparent_28%),radial-gradient(circle_at_80%_0%,rgba(99,102,241,0.20),transparent_30%),linear-gradient(135deg,#f8fafc,#e6f4f1_45%,#eef2ff)]" />
-
-      <header className="border-b border-white/70 bg-white/75 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
-            <div className="grid size-11 place-items-center rounded-xl bg-slate-950 text-sm font-black text-white shadow-lg shadow-slate-300">
-              EW
-            </div>
-            <div>
-              <h1 className="text-xl font-black tracking-normal text-slate-950">
-                EMIWise
-              </h1>
-              <p className="text-xs font-bold text-slate-500">
-                Modern loan calculator
-              </p>
-            </div>
-          </div>
-
-          <div className="hidden rounded-xl border border-slate-200 bg-white p-1 shadow-sm sm:flex">
-            <button
-              type="button"
-              onClick={() => setMode("single")}
-              className={`rounded-lg px-4 py-2 text-sm font-black transition ${
-                mode === "single"
-                  ? "bg-slate-950 text-white"
-                  : "text-slate-600 hover:bg-slate-100"
-              }`}
-            >
-              Single EMI
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode("compare")}
-              className={`rounded-lg px-4 py-2 text-sm font-black transition ${
-                mode === "compare"
-                  ? "bg-slate-950 text-white"
-                  : "text-slate-600 hover:bg-slate-100"
-              }`}
-            >
-              Comparison
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <section className="mb-6 grid gap-6 lg:grid-cols-[1fr_360px] lg:items-end">
           <div>
             <p className="text-sm font-black uppercase tracking-wide text-teal-700">
@@ -575,7 +508,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="mb-6 grid grid-cols-2 rounded-xl border border-slate-200 bg-white p-1 shadow-sm sm:hidden">
+        <div className="mb-6 grid max-w-md grid-cols-2 rounded-xl border border-slate-200 bg-white p-1 shadow-sm">
           <button
             type="button"
             onClick={() => setMode("single")}
@@ -597,7 +530,44 @@ export default function Home() {
         </div>
 
         {mode === "single" ? <SingleCalculator /> : <ComparisonCalculator />}
+
+        <section className="mt-8 grid gap-5 lg:grid-cols-2">
+          <div className="rounded-xl border border-white/70 bg-white/85 p-5 shadow-lg shadow-slate-200/70">
+            <h2 className="text-2xl font-black text-slate-950">
+              EMI example: Rs. 10 lakh at 9% for 5 years
+            </h2>
+            <p className="mt-3 leading-7 text-slate-600">
+              A Rs. 10 lakh loan at 9% for 5 years has an estimated EMI of about
+              Rs. 20,758, total repayment of about Rs. 12.45 lakh, and total
+              interest of about Rs. 2.45 lakh. If you increase tenure, EMI usually
+              falls but total interest rises.
+            </p>
+          </div>
+          <div className="rounded-xl border border-white/70 bg-white/85 p-5 shadow-lg shadow-slate-200/70">
+            <h2 className="text-2xl font-black text-slate-950">EMI Calculator FAQs</h2>
+            <div className="mt-4 space-y-4">
+              {[
+                [
+                  "What does EMI include?",
+                  "EMI includes principal repayment and interest. In early months, the interest portion is usually higher.",
+                ],
+                [
+                  "Why compare total interest?",
+                  "A low EMI can still be expensive when tenure is long, so total interest shows the real borrowing cost.",
+                ],
+                [
+                  "Can this replace a bank quote?",
+                  "No. Use it for planning, then verify fees, insurance, and final EMI with the lender.",
+                ],
+              ].map(([question, answer]) => (
+                <div key={question}>
+                  <h3 className="font-black text-slate-950">{question}</h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">{answer}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
   )
 }
