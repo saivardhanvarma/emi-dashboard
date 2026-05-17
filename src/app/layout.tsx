@@ -55,13 +55,11 @@ export default function RootLayout({
 }: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
-<<<<<<< Updated upstream
       <head>
         <meta name="google-adsense-account" content="ca-pub-1483257091993123" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {/* Google Analytics */}
-
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-X9C7SZWMH6"
           strategy="afterInteractive"
@@ -104,9 +102,6 @@ export default function RootLayout({
           <SiteFooter />
         </div>
       </body>
-=======
-      <body suppressHydrationWarning>{children}</body>
->>>>>>> Stashed changes
     </html>
   )
 }
