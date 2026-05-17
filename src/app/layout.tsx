@@ -63,6 +63,13 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
 
+        {/* Google AdSense - load once for all pages */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1483257091993123"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
+
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
