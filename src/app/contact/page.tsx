@@ -19,7 +19,7 @@ export default function ContactPage() {
       <div className="grid gap-5 lg:grid-cols-[1fr_360px]">
         <ContentCard>
           <form
-            action="mailto:support@emiwyze.in"
+            action="mailto:support@emiwyze.online"
             method="post"
             encType="text/plain"
             className="grid gap-4"
@@ -64,8 +64,8 @@ export default function ContactPage() {
           <h2 className="text-2xl font-black text-slate-950">Direct Contact</h2>
           <p className="mt-3 leading-7 text-slate-600">
             Email:{" "}
-            <a className="font-black text-teal-700" href="mailto:support@emiwyze.in">
-              support@emiwyze.in
+            <a className="font-black text-teal-700" href="mailto:support@emiwyze.online">
+              support@emiwyze.online
             </a>
           </p>
           <p className="mt-3 leading-7 text-slate-600">

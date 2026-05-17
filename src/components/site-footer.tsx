@@ -61,7 +61,7 @@ export function SiteFooter() {
             for loan, EMI, SIP, GST, and personal finance planning in India.
           </p>
           <p className="mt-4 text-sm font-bold text-slate-500">
-            Contact: support@emiwyze.in
+            Contact: support@emiwyze.online
           </p>
         </div>
 
