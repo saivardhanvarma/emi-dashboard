@@ -101,12 +101,12 @@ function SliderField({
 
   return (
     <div className="block rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-      <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <label className="font-black text-slate-800" htmlFor={`${label}-input`}>
           {label}
         </label>
-        <div className="flex min-w-0 flex-col items-end gap-1">
-          <div className="flex max-w-44 items-center rounded-md border border-slate-200 bg-slate-50 text-slate-950 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100">
+        <div className="flex flex-col gap-1">
+          <div className="flex w-full items-center rounded-md border border-slate-200 bg-slate-50 text-slate-950 focus-within:border-teal-500 focus-within:ring-2 focus-within:ring-teal-100 sm:w-44">
             <input
               id={`${label}-input`}
               type="number"
@@ -163,7 +163,7 @@ function SingleCalculator() {
       <div className="space-y-4">
         <div className="rounded-xl border border-white/70 bg-white/80 p-5 shadow-xl shadow-slate-200/70 backdrop-blur sm:p-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-black uppercase tracking-wide text-teal-700">
                 Single EMI calculator
               </p>
@@ -171,7 +171,7 @@ function SingleCalculator() {
                 Calculate one loan clearly.
               </h2>
             </div>
-            <div className="rounded-lg bg-slate-950 px-4 py-3 text-white">
+            <div className="w-full rounded-lg bg-slate-950 px-4 py-3 text-white sm:w-auto sm:shrink-0">
               <p className="text-xs font-bold uppercase tracking-wide text-slate-300">
                 Monthly EMI
               </p>
@@ -472,6 +472,39 @@ function ComparisonCalculator() {
   )
 }
 
+function Footer() {
+  return (
+    <footer className="border-t border-white/70 bg-white/75 backdrop-blur-xl">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-6 text-sm text-slate-600 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
+        <div>
+          <div className="flex items-center gap-3">
+            <div className="grid size-9 place-items-center rounded-lg bg-slate-950 text-xs font-black text-white">
+              EW
+            </div>
+            <div>
+              <p className="font-black text-slate-950">EMIWise</p>
+              <p className="text-xs font-bold text-slate-500">
+                EMI estimates for faster loan decisions.
+              </p>
+            </div>
+          </div>
+          <p className="mt-4 max-w-3xl leading-6">
+            EMI values are estimates based on the loan amount, interest rate, and
+            tenure entered. Final repayment terms may vary by lender, fees,
+            taxes, and eligibility checks.
+          </p>
+        </div>
+
+        <div className="grid gap-2 text-left font-bold text-slate-500 lg:text-right">
+          <p>Single EMI calculator</p>
+          <p>Loan comparison</p>
+          <p className="text-slate-400">2026 EMIWise</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
 export default function Home() {
   const [mode, setMode] = useState<"single" | "compare">("single")
 
@@ -569,5 +602,11 @@ export default function Home() {
           </div>
         </section>
       </main>
+<<<<<<< Updated upstream
+=======
+
+      <Footer />
+    </div>
+>>>>>>> Stashed changes
   )
 }

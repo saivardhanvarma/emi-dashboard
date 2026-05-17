@@ -55,6 +55,7 @@ export default function RootLayout({
 }: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
+<<<<<<< Updated upstream
       <head>
         <meta name="google-adsense-account" content="ca-pub-1483257091993123" />
       </head>
@@ -103,6 +104,9 @@ export default function RootLayout({
           <SiteFooter />
         </div>
       </body>
+=======
+      <body suppressHydrationWarning>{children}</body>
+>>>>>>> Stashed changes
     </html>
   )
 }
