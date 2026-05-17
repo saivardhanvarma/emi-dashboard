@@ -58,9 +58,8 @@ export default function RootLayout({
       <head>
         <meta name="google-adsense-account" content="ca-pub-1483257091993123" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {/* Google Analytics */}
-
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-X9C7SZWMH6"
           strategy="afterInteractive"
