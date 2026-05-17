@@ -1,6 +1,6 @@
-# EMIWise
+# EMIWYZE
 
-EMIWise is a responsive Next.js and TypeScript web app for calculating loan EMIs and comparing multiple loan offers.
+EMIWYZE is a responsive Next.js and TypeScript web app for calculating loan EMIs and comparing multiple loan offers.
 
 ## Features
 
