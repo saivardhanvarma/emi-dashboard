@@ -436,11 +436,10 @@ function ComparisonCalculator() {
           return (
             <article
               key={loan.id}
-              className={`rounded-xl border p-4 shadow-lg transition hover:-translate-y-1 sm:p-5 ${
-                isBest
+              className={`rounded-xl border p-4 shadow-lg transition hover:-translate-y-1 sm:p-5 ${isBest
                   ? "border-teal-300 bg-teal-50 shadow-teal-100"
                   : "border-white/70 bg-white/80 shadow-slate-200/70"
-              }`}
+                }`}
             >
               <div className="flex items-center justify-between gap-3">
                 <div>
@@ -467,9 +466,8 @@ function ComparisonCalculator() {
                 </p>
                 <div className="mt-4 h-3 overflow-hidden rounded-full bg-slate-200">
                   <div
-                    className={`h-full rounded-full ${
-                      isBest ? "bg-teal-500" : "bg-indigo-400"
-                    }`}
+                    className={`h-full rounded-full ${isBest ? "bg-teal-500" : "bg-indigo-400"
+                      }`}
                     style={{ width: `${barWidth}%` }}
                   />
                 </div>
@@ -543,7 +541,7 @@ export default function Home() {
 
       <header className="border-b border-white/70 bg-white/75 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <div className="grid size-11 place-items-center rounded-xl bg-slate-950 text-sm font-black text-white shadow-lg shadow-slate-300">
               EW
             </div>
@@ -555,28 +553,26 @@ export default function Home() {
                 Modern loan calculator
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="hidden rounded-xl border border-slate-200 bg-white p-1 shadow-sm sm:flex">
             <button
               type="button"
               onClick={() => setMode("single")}
-              className={`rounded-lg px-4 py-2 text-sm font-black transition ${
-                mode === "single"
+              className={`rounded-lg px-4 py-2 text-sm font-black transition ${mode === "single"
                   ? "bg-slate-950 text-white"
                   : "text-slate-600 hover:bg-slate-100"
-              }`}
+                }`}
             >
               Single EMI
             </button>
             <button
               type="button"
               onClick={() => setMode("compare")}
-              className={`rounded-lg px-4 py-2 text-sm font-black transition ${
-                mode === "compare"
+              className={`rounded-lg px-4 py-2 text-sm font-black transition ${mode === "compare"
                   ? "bg-slate-950 text-white"
                   : "text-slate-600 hover:bg-slate-100"
-              }`}
+                }`}
             >
               Comparison
             </button>
@@ -620,18 +616,16 @@ export default function Home() {
           <button
             type="button"
             onClick={() => setMode("single")}
-            className={`rounded-lg px-3 py-3 text-sm font-black transition ${
-              mode === "single" ? "bg-slate-950 text-white" : "text-slate-600"
-            }`}
+            className={`rounded-lg px-3 py-3 text-sm font-black transition ${mode === "single" ? "bg-slate-950 text-white" : "text-slate-600"
+              }`}
           >
             Single EMI
           </button>
           <button
             type="button"
             onClick={() => setMode("compare")}
-            className={`rounded-lg px-3 py-3 text-sm font-black transition ${
-              mode === "compare" ? "bg-slate-950 text-white" : "text-slate-600"
-            }`}
+            className={`rounded-lg px-3 py-3 text-sm font-black transition ${mode === "compare" ? "bg-slate-950 text-white" : "text-slate-600"
+              }`}
           >
             Comparison
           </button>
